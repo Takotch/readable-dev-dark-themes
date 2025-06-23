@@ -1,0 +1,159 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "version": 3,
+    "final_space": true,
+    "patch_pwsh_bleed": true,
+    "upgrade": {
+        "notice": false,
+        "source": "cdn",
+        "auto": false
+    },
+    "blocks": [
+        {
+            "type": "prompt",
+            "newline": true,
+            "alignment": "left",
+            "segments": [
+                {
+                    "type": "os",
+                    "style": "plain",
+                    "foreground": "green",
+                    "background": "default",
+                    "template": "{{ .Icon }} ",
+                    "properties": {
+                        "alma": "\uf31d ",
+                        "alpine": "\uf300 ",
+                        "android": "\uf17b ",
+                        "aosc": "\uf301 ",
+                        "arch": "\uf303 ",
+                        "centos": "\uf304 ",
+                        "coreos": "\uf305 ",
+                        "debian": "\uf306 ",
+                        "devuan": "\uf307 ",
+                        "elementary": "\uf309 ",
+                        "fedora": "\uf30a ",
+                        "gentoo": "\uf30d ",
+                        "linux": "\ue712 ",
+                        "macos": "\ue711 ",
+                        "mageia": "\uf310 ",
+                        "manjaro": "\uf312 ",
+                        "mint": "\uf30e ",
+                        "nixos": "\uf313 ",
+                        "opensuse": "\uf314 ",
+                        "raspbian": "\uf315 ",
+                        "redhat": "\uef5d ",
+                        "rocky": "\uf32b ",
+                        "sabayon": "\uf317 ",
+                        "slackware": "\uf319 ",
+                        "ubuntu": "\uf31b ",
+                        "windows": "\ue62a "
+                    }
+                },
+                {
+                    "type": "session",
+                    "style": "plain",
+                    "foreground": "green",
+                    "background": "default",
+                    "template": "{{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} "
+                },
+                {
+                    "type": "path",
+                    "style": "plain",
+                    "foreground": "yellow",
+                    "background": "default",
+                    "template": "{{ .Path }} ",
+                    "properties": {
+                        "folder_separator_icon": "/",
+                        "home_icon": "~",
+                        "folder_icon": "..",
+                        "windows_registry_icon": "\uf085 ",
+                        "style": "agnoster_short",
+                        "max_depth": 4,
+                        "hide_root_location": false
+                    }
+                },
+                {
+                    "type": "git",
+                    "style": "plain",
+                    "foreground": "cyan",
+                    "background": "default",
+                    "foreground_templates": [
+                        "{{ if or (.Working.Changed) (.Staging.Changed) }}yellow{{ end }}",
+                        "{{ if and (gt .Behind 0) (gt .Ahead 0) }}magenta{{ end }}",
+                        "{{ if gt .Behind 0 }}red{{ end }}",
+                        "{{ if gt .Ahead 0 }}green{{ end }}"
+                    ],
+                    "template": "<cyan>[</>{{ if .UpstreamGone }}\uf4ad {{ else }}{{ url .UpstreamIcon .UpstreamURL }}{{ end }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if and (.BranchStatus) (.Working.Changed ) }} |{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.BranchStatus) (.Working.Changed ) }}{{ if .Staging.Changed }} |{{ end }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}<cyan>]</> ",
+                    "properties": {
+                        "fetch_status": true,
+                        "fetch_upstream_icon": true,
+                        "status_formats": {
+                            "Unmerged": "\uf4db %d",
+                            "Deleted": "\uf458 %d",
+                            "Added": "\uf457 %d",
+                            "Modified": "\uf459 %d",
+                            "Untracked": "\uf474 %d"
+                        },
+                        "source": "cli",
+                        "branch_template": "{{ .Branch }}",
+                        "branch_icon": "\uf418 ",
+                        "branch_identical_icon": "\uf4ac ",
+                        "branch_ahead_icon": "\uf431 ",
+                        "branch_behind_icon": "\uf433 ",
+                        "branch_gone_icon": "\uf4ad ",
+                        "commit_icon": "\ueafc ",
+                        "tag_icon": "\uf412 ",
+                        "rebase_icon": "\uead6 ",
+                        "cherry_pick_icon": "\ue29b ",
+                        "revert_icon": "\ueae2 ",
+                        "merge_icon": "\uf419 ",
+                        "no_commits_icon": "\uec10 ",
+                        "github_icon": "\uea84 ",
+                        "gitlab_icon": "\ue7eb ",
+                        "bitbucket_icon": "\ue703 ",
+                        "azure_devops_icon": "\uebe8 ",
+                        "codecommit_icon": "\uf270 ",
+                        "codeberg_icon": "\uf330 ",
+                        "git_icon": "\ue702 "
+                    }
+                },
+                {
+                    "type": "svn",
+                    "style": "plain",
+                    "foreground": "cyan",
+                    "background": "default",
+                    "foreground_templates": [
+                        "{{ if .Working.HasConflicts }}red{{ end }}",
+                        "{{ if .Working.Changed }}yellow{{ end }}"
+                    ],
+                    "template": "<cyan>[</>\ue8b5  \uf418 {{ .Branch }}  \ueafc {{ .BaseRev }} {{ .Working.String }}<cyan>]</> ",
+                    "properties": {
+                        "fetch_status": true,
+                        "status_formats": {
+                            "Untracked": "\uf474 %d",
+                            "Modified": "\uf459 %d",
+                            "Deleted": "\uf458 %d",
+                            "Added": "\uf457 %d",
+                            "Moved": "\uf45a %d",
+                            "Conflicted": "\uf40c %d"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "prompt",
+            "newline": true,
+            "alignment": "left",
+            "segments": [
+                {
+                    "type": "text",
+                    "style": "plain",
+                    "foreground": "#cccccc",
+                    "template": "{{ if .Root }}#{{ else }}${{ end }}"
+                }
+            ]
+        }
+    ],
+    "console_title_template": "{{ .UserName }}@{{ .HostName }}:{{ .PWD }}"
+}
